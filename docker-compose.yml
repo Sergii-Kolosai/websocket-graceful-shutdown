@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: websocket-app
+    depends_on:
+      - redis
+    ports:
+      - "8000:8000"
+
+    stop_grace_period: 40s
+
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      REDIS_BROADCAST_CHANNEL: ws:broadcast
+      WS_CONNECTIONS_KEY: ws:connections
+
+      GRACEFUL_SHUTDOWN_TIMEOUT: "30"
+      GRACEFUL_SHUTDOWN_LOG_INTERVAL: "5"
+      REDIS_PUBSUB_POLL_INTERVAL: "1.0"
+
+  redis:
+    image: redis:7-alpine
+    container_name: websocket-redis
+    ports:
+      - "6379:6379"
