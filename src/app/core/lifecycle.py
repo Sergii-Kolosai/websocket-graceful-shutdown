@@ -56,7 +56,7 @@ async def setup_lifespan(app: FastAPI) -> LifespanContext:
     Returns:
         LifespanContext: Initialized context with all runtime resources.
     """
-    logger.info("Connecting to Redis at %s", REDIS_URL)
+    logger.info(f'Connecting to Redis at {REDIS_URL}')
     redis = Redis.from_url(REDIS_URL, decode_responses=True)
 
     # Remove stale connection records from previous runs.

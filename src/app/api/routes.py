@@ -56,6 +56,7 @@ async def websocket_endpoint(websocket: WebSocket, manager: ManagerWsDep):
 
     Args:
         websocket: The client WebSocket connection.
+        manager: ConnectionManager instance injected for this WebSocket endpoint.
 
     Raises:
         WebSocketDisconnect: When the client disconnects.
